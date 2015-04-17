@@ -1,0 +1,14 @@
+package = main
+GLOBAL: env<1>
+_main: env<2>
+a = 0
+b = 0
+t<1> = a
+t<2> = 3
+a = t<2>
+t<3> = b
+t<4> = a
+t<5> = 1
+t<6> = t<5> + t<4>
+b = t<6>
+ret

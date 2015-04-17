@@ -1,0 +1,7 @@
+Reading "src/golang.flex"
+Constructing NFA : 811 states in NFA
+Converting NFA to DFA : 
+................................................................................................................................................................................................................................................................................................................................
+322 states before minimization, 242 states in minimized DFA
+Old file "src/Yylex.java" saved as "src/Yylex.java~"
+Writing code to "src/Yylex.java"

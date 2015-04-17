@@ -1,0 +1,25 @@
+# pwd
+cd src
+pwd
+java -cp ../lib/java-cup-11b-runtime.jar:. Parser ../$1.go &> ../a.out
+java -cp ../lib/java-cup-11b-runtime.jar:. Parser ../$1.go > ../our.out
+array=( $(sed -rn 's/.*# Reduce with prod #([0-9]+) .*/\1/p' ../a.out | cut -f1) );
+
+echo "digraph {" > ../$1.dot
+for ((i=${#array[@]}-1; i>=0; i--)); do
+	index="$(echo ${array[$i]})"
+
+	a=$(sed -rn "s/.*\[$index\] (.*) ::= (.*).*/\1/p" ../productions.out)
+	temp_arr=( $(sed -rn "s/.*\[$index\] (.*) ::= (.*).*/\2/p" ../productions.out | awk 'split($0,parts," ")') );
+
+	if [ ${#temp_arr[@]} -eq 0 ]
+		then echo "$a->epsilon" >> ../$1.dot 
+	fi
+	for ((j=0; j<${#temp_arr[@]}; j++)); do
+		foo="$(echo ${temp_arr[$j]})"
+		bar=${a/\$/}
+        echo "$bar->$foo" >> ../$1.dot
+  	done
+done
+echo "}" >> ../$1.dot
+mv ../$1.dot ../

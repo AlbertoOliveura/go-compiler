@@ -1,0 +1,6 @@
+1. Multiple declarations in same scope
+
+
+Utsav will handle the problem with For statements
+
+spill before exiting the simple block
